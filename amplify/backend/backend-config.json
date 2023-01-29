@@ -1,0 +1,9 @@
+{
+  "function": {
+    "basicneeds1be6b02b": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  }
+}

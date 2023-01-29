@@ -1,0 +1,90 @@
+<html>
+<body>
+<svg id="graph" width="100%" height="800"></svg>
+</body>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script>
+var data = [
+	{"value":3,"txt":"生存"},
+	{"value":3,"txt":"愛・所属"},
+	{"value":4,"txt":"力"},
+	{"value":5,"txt":"自由"},
+	{"value":5,"txt":"楽しみ"}
+];
+var width = document.querySelector('svg').clientWidth;
+var height = document.querySelector('svg').clientHeight;
+var rw,rh;
+var nodesData = [];
+for(var i=0,d=data.length;i<d;i++){
+	rw = data[i].r + (width-2*data[i].r) * Math.random();
+	rh = data[i].r + (height-2*data[i].r) * Math.random();
+	nodesData.push({
+		index:i,
+		x:rw,
+		y:rh,
+		r:data[i].value*25,
+		txt:data[i].txt+":"+data[i].value
+	});
+}
+var nodeGroup = d3.select('svg')
+	.selectAll('g')
+	.data(nodesData)
+	.enter()
+	.append('g')
+	.call(
+		d3.drag()
+		.on('start',dragstarted)
+		.on('drag',dragged)
+		.on('end',dragended)
+	);
+var colorScale = ['skyblue','pink','red','blue','orange'];
+	
+nodeGroup
+	.append('circle')
+	.attr('cx',function(d){return d.x;})
+	.attr('cy',function(d){return d.y;})
+	.attr('r',function(d){return d.r;})
+	.attr('fill',function(d){return colorScale[d.index];});
+nodeGroup
+	.append('text')
+	.attr('x',function(d){return d.x;})
+	.attr('y',function(d){return d.y;})
+	.attr('text-anchor','middle')
+	.attr('dominant-baseline','middle')
+	.style('fill','#fff')
+	.text(function(d){return d.txt;});
+var simulation = d3.forceSimulation()
+	.force(
+		'collide',d3.forceCollide().radius(function(d){return d.r*1.1;})
+	)
+	.force('charge',d3.forceManyBody())
+	.force(
+		'x',d3.forceX().strength(0.03).x(width/2)
+	)
+	.force(
+		'y',d3.forceY().strength(0.03).y(height/2)
+	);
+simulation.nodes(nodesData).on('tick',ticked);
+function ticked(){
+	nodeGroup.select('circle')
+		.attr('cx',function(d){return d.x;})
+		.attr('cy',function(d){return d.y;});
+	nodeGroup.select('text')
+		.attr('x',function(d){return d.x;})
+		.attr('y',function(d){return d.y;});
+}
+function dragstarted(d){
+	if(!d3.event.active)simulation.alphaTarget(0.3).restart();
+	d.fx = d.x;
+	d.fy = d.y;
+}
+function dragged(d){
+	d.fx = d3.event.x;
+	d.fy = d3.event.y;
+}
+function dragended(d){
+	d.fx = null;
+	d.fy = null;
+};
+</script>
+</html>
