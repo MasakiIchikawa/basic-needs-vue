@@ -4,9 +4,9 @@ import {createI18n} from 'vue-i18n'
 import App from './App.vue'
 import router from './router'
 
-//import VueSession from "vue-session"
-import {messages,dateTimeFormats,numberFormats} from "./vue_lang/index.js"
-import Config from "./components/Const.vue";
+import {messages,dateTimeFormats,numberFormats} from "@/vue_lang/index.js"
+
+import {BInputGroup,BFormInput,BFormSelect} from 'bootstrap-vue-next'
 
 import GuestMenu from "./components/GuestMenu.vue"
 import ErrorMessage from "./components/ErrorMessage.vue"
@@ -23,7 +23,7 @@ const language =
 
 const i18n = createI18n({
   locale: language,
-  fallbackLocale:'ja',
+  fallbackLocale:'en',
   allowComposition: true,
   messages: messages,
   dateTimeFormats:dateTimeFormats,
@@ -49,6 +49,9 @@ app.use(i18n)
 app.use(store)
 app.use(router)
 
+app.component('b-form-input',BFormInput)
+app.component('b-input-group',BInputGroup)
+app.component('b-form-select',BFormSelect)
 app.component('guest-menu',GuestMenu)
 app.component('error-message',ErrorMessage)
 app.component('info-message',InfoMessage)

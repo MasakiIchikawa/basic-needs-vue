@@ -19,44 +19,42 @@ const contents = {
 			level1:'1.全く当てはまらない',
 			email:'メールアドレス',
 			world_area:'居住地域',
-			world_area_select:[
-				{id:1,name:'アフリカ'},
-				{id:2,name:'アジア'},
-				{id:3,name:'ヨーロッパ'},
-				{id:4,name:'南アメリカ'},
-				{id:5,name:'北アメリカ'},
-				{id:6,name:'オセアニア'}
-			],
+			africa:'アフリカ',
+			asia:'アジア',
+			europe:'ヨーロッパ',
+			south_america:'南アメリカ',
+			north_america:'北アメリカ',
+			oceania:'オセアニア',
 			sex:'性別',
-			sex_select:[
-				{id:1,name:'男'},
-				{id:2,name:'女'}
-			],
+			male:'男性',
+			female:'女性',
 			birth_year:'誕生年',
 			marriage:'婚姻',
-			marriage_select:[
-				{id:1,name:'独身'},
-				{id:2,name:'既婚'}
-			],
+			single:'独身',
+			'married':'既婚',
 			job:'職業',
-			job_select:[
-				{id:1,name:'会社員'},
-				{id:2,name:'学生'},
-				{id:3,name:'公務員'},
-				{id:4,name:'自営業'},
-				{id:5,name:'フリーター'},
-				{id:6,name:'専業主婦・主夫'},
-				{id:7,name:'団体職員'},
-				{id:99,name:'その他'}
-			],
+			company_employee:'会社員',
+			student:'学生',
+			civil_servant:'公務員',
+			self_employed:'自営業',
+			parttimer:'フリーター',
+			housemaker:'専業主婦・主夫',
+			group_staff:'団体職員',
+			other:'その他',
 			other_job:'その他の職業内容',
 			birth_year_placeholder:'4桁入力',
 			rtnpo_name:'日本リアリティセラピー協会',
-			needs_label:['生存','愛・所属','力','自由','楽しみ'],
+			needs_survival:'生存',
+			needs_love:'愛/所属',
+			needs_power:'力',
+			needs_freedom:'自由',
+			needs_fun:'楽しみ',
 			change_locale:'English',
 			display_graph:'グラフで表示',
 			display_radar:'レーダーチャートで表示',
-			display_bar2:'棒グラフで表示'
+			display_bar2:'棒グラフで表示',
+			year_prepend:'西暦',
+			year_append:'年',
 		},
 		// メッセージ
 		sentence: {
@@ -80,7 +78,8 @@ const contents = {
 			content_need2:'競争に勝ちたい、何かを達成したい、人に認めて欲しいといった欲求です。',
 			content_need3:'束縛されたくない、変化が欲しい、自分で何か決めていきたいといった欲求です。',
 			content_need4:'ユーモア、好奇心、遊び心などに関係した欲求です。',
-			result_alert:'結果数値は大きければいいわけではないのでご注意ください。\n欲求が強いと、その欲求がなかなか満たされないこともあるでしょう。\n逆に欲求が弱いとその欲求は満たしやすいとも言えます。'
+			result_alert:'結果数値は大きければいいわけではないのでご注意ください。\n欲求が強いと、その欲求がなかなか満たされないこともあるでしょう。\n逆に欲求が弱いとその欲求は満たしやすいとも言えます。',
+			loading:'しばらくお待ちください'
 		},
 		validate:{
 			require:'{target}は必須項目です',
@@ -120,7 +119,7 @@ const contents = {
 			currency: 'JPY',
 			currencyDisplay: 'symbol'
 		}
-	}
+	},
 };
 
 export { contents };

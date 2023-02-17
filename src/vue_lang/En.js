@@ -19,44 +19,42 @@ const contents = {
 			level1:'1.Not applicable at all',
 			email:'email',
 			world_area:'Residential area',
-			world_area_select:[
-				{id:1,name:'Africa'},
-				{id:2,name:'Asia'},
-				{id:3,name:'Europe'},
-				{id:4,name:'South America'},
-				{id:5,name:'North America'},
-				{id:6,name:'Oceania'}
-			],
+			africa:'Africa',
+			asia:'Asia',
+			europe:'Europe',
+			south_america:'South America',
+			north_america:'North America',
+			oceania:'Oseania',
 			sex:'Gender',
-			sex_select:[
-				{id:1,name:'Male'},
-				{id:2,name:'Female'}
-			],
+			male:'Male',
+			female:'Female',
 			birth_year:'Year of birth',
 			marriage:'Marriage status',
-			marriage_select:[
-				{id:1,name:'Single'},
-				{id:2,name:'Married'}
-			],
+			single:'Single',
+			married:'Married',
 			job:'Occupation',
-			job_select:[
-				{id:1,name:'Company employee'},
-				{id:2,name:'Student'},
-				{id:3,name:'Civil servant'},
-				{id:4,name:'Self employed'},
-				{id:5,name:'Part-timer'},
-				{id:6,name:'Housemaker'},
-				{id:7,name:'Group staff'},
-				{id:99,name:'Other'}
-			],
+			company_employee:'Company employee',
+			student:'Student',
+			civil_servant:'Civil servant',
+			self_employed:'Self employed',
+			parttimer:'Part-timer',
+			housemaker:'Housemaker',
+			group_staff:'Group staff',
+			other:'Other',
 			other_job:'Other(detail)',
 			birth_year_placeholder:'4-digit input',
 			rtnpo_name:'The William Glasser Institute Japan',
-			needs_label:['Survival','Love/Belonging','Power','Freedom','Fun/Pleasure'],
+			needs_survival:'Survival',
+			needs_love:'Love/Belonging',
+			needs_power:'Power',
+			needs_freedom:'Freedom',
+			needs_fun:'Fun/Pleasure',
 			change_locale:'日本語',
 			display_graph:'Display as graph',
 			display_radar:'Display on radar chart',
-			display_bar2:'Display as a bar graph'
+			display_bar2:'Display as a bar graph',
+			year_prepend:'Year',
+			year_append:'',
 		},
 		// メッセージ
 		sentence: {
@@ -80,7 +78,8 @@ const contents = {
 			content_need2:'The needs to win the competition,achieve something, and be recognized by others.',
 			content_need3:'The needs to be tied up, make change, decide something yourself.',
 			content_need4:'Needs related to humor,curiosity,playfulness, etc.',
-			result_alert:'Please note that the result value does not have to be large.\nIf you have a strong need, it may be difficult to satisfy that need.\nOn the contrary, if the need is weak, it can be said that the need is easy to satisfy.'
+			result_alert:'Please note that the result value does not have to be large.\nIf you have a strong need, it may be difficult to satisfy that need.\nOn the contrary, if the need is weak, it can be said that the need is easy to satisfy.',
+			loading:'Please wait a moment'
 		},
 		validate:{
 			require:'{target} is a required item.',

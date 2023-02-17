@@ -1,11 +1,20 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import BootstrapVueNext from 'bootstrap-vue-next'
-import BntHeader from './components/BntHeader.vue'
-import BntFooter from './components/BntFooter.vue'
+import { onMounted } from 'vue'
+import { RouterView } from 'vue-router'
+import {useStore} from 'vuex'
+import {useI18n} from 'vue-i18n'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
+
+const store = useStore()
+const t = useI18n()
+
+onMounted(() => {
+	if(store.state.lang){
+		t.locale.value = store.state.lang
+	}
+})
 
 </script>
 

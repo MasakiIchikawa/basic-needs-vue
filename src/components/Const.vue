@@ -2,4 +2,5 @@
 const Config = {
 	NEEDS_COLOR:['lightblue','mistyrose','pink','palegreen','gold'],
 }
+export {Config}
 </script>
