@@ -52,7 +52,7 @@ const contents = {
 			change_locale:'日本語',
 			display_graph:'Display as graph',
 			display_radar:'Display on radar chart',
-			display_bar2:'Display as a bar graph',
+			display_bar:'Display as a bar graph',
 			year_prepend:'Year',
 			year_append:'',
 		},

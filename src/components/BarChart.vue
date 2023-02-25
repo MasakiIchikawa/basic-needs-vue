@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent,reactive,onUpdated,onMounted } from 'vue';
+import { defineComponent,defineExpose,reactive,onUpdated,onMounted } from 'vue';
 import {Bar} from 'vue-chartjs';
 import {
   Chart as ChartJS,
@@ -21,18 +21,17 @@ defineComponent({ Bar })
 const {t} = useI18n()
 const props = defineProps<{
   needsData:number[],
-  needsLabel:string[],
 }>()
 const data = ref<ChartData<'bar'>>({
   datasets: []
 })
 const createData=()=>({
     labels:[
-      props.needsLabel[0],
-      props.needsLabel[1],
-      props.needsLabel[2],
-      props.needsLabel[3],
-      props.needsLabel[4]
+      t('word.needs_survival'),
+      t('word.needs_love'),
+      t('word.needs_power'),
+      t('word.needs_freedom'),
+      t('word.needs_fun')
     ],
     datasets: [ {
       data:[
@@ -56,25 +55,18 @@ const options = reactive({
     legend:false
   }
 })
-onMounted(()=>{
+const updateChart = () => {
   data.value = createData()
-})
-onUpdated(()=>{
-  data.value = createData()
+}
+defineExpose({
+  updateChart
 })
 </script>
 
 <template>
-  <span class="hidden">{{ props.needsData[0] }}</span>
   <Bar
     id="my-chart-id"
     :options="options"
     :data="data"
-  />{{ props.needsLabel[0] }}
+  />
 </template>
-<style scoped>
-.hidden{
-  font-size:1px;
-  opacity: 0;
-}
-</style>

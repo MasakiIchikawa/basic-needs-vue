@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref,reactive,defineComponent,onMounted } from "vue";
+import { ref,reactive,defineComponent,onMounted,onUpdated } from "vue";
 import BubbleChart from "@/components/BubbleChart.vue"
 import {Config} from "@/components/Const.vue"
 import {useRoute} from "vue-router"
@@ -19,13 +19,12 @@ const chartData = reactive({
 	data:[0,0,0,0,0],
 	backgroundColor:['','','','','']
 })
-const change_chart_url = ref('')
 const bubble1 = ref()
+let loaded = 0
 const fillData = () => {
 	axios.post("/api/bnt/get_result",{token:token})
 	.then((res) => {
 		console.log(res)
-		change_chart_url.value = "/result2/"+token
 		needs.value = res.data
 		chartData['labels'] = [
 			t('word.needs_survival'),
@@ -36,7 +35,6 @@ const fillData = () => {
 		]
 		chartData['data'] = res.data
 		chartData['backgroundColor'] = Config.NEEDS_COLOR
-		bubble1.value.createBubble(chartData)
 	})
 }
 const style0 = () => { return {'--bgcolor':Config.NEEDS_COLOR[0]}}
@@ -46,6 +44,7 @@ const style3 = () => {return{'--bgcolor':Config.NEEDS_COLOR[3]}}
 const style4 = () => {return{'--bgcolor':Config.NEEDS_COLOR[4]}}
 onMounted(() => {
 	fillData()
+	loaded=1
 })
 </script>
 
@@ -56,13 +55,13 @@ onMounted(() => {
 	<div class="card">
 		<div class="card-header">{{$t('word.result_title')}}</div>
 		<div class="card-body text-center">
-			<bubble-chart :chart-data="chartData" ref="bubble1" />
+			<bubble-chart v-if="loaded" :chart-data="chartData" ref="bubble1" />
 			<br />
 			<div class="border p-2 border-danger text-danger">
 				{{$t('sentence.result_alert')}}
 			</div><br />
-			<a class="btn btn-primary" :href="change_chart_url">{{$t('word.display_graph')}}</a><br /><br />
-
+			<router-link :to="`/result2/${token}`" class="btn btn-primary">{{$t('word.display_graph')}}</router-link>
+			<br /><br />
 			<div class="row border-top">
 				<div class="col-md-4 label alert fas fa-medkit need" :style="style0">
 					{{$t('word.needs_survival')}}&nbsp;:&nbsp;{{needs[0]}}

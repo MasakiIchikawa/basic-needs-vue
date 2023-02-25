@@ -52,7 +52,7 @@ const contents = {
 			change_locale:'English',
 			display_graph:'グラフで表示',
 			display_radar:'レーダーチャートで表示',
-			display_bar2:'棒グラフで表示',
+			display_bar:'棒グラフで表示',
 			year_prepend:'西暦',
 			year_append:'年',
 		},

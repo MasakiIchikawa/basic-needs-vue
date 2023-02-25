@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted,watch } from 'vue'
+import {useI18n} from 'vue-i18n'
 type ChartData = {
 	data:number[],
 	labels:String[],
@@ -8,10 +9,18 @@ type ChartData = {
 const props = defineProps([
 	'chartData'
 ])
+const {t} = useI18n()
 const name = 'BubbleChart'
 const data = () => {
 	return props.chartData
 }
+const labels = () => ([
+	t('word.needs_survival'),
+	t('word.needs_love'),
+	t('word.needs_power'),
+	t('word.needs_freedom'),
+	t('word.needs_fun')
+])
 const createBubble = (chartData:ChartData) => {
 	var width = document.querySelector('svg').clientWidth;
 	var height = document.querySelector('svg').clientHeight;
@@ -26,7 +35,7 @@ const createBubble = (chartData:ChartData) => {
 			x:rw,
 			y:rh,
 			r:r,
-			txt:chartData.labels[i]+":"+chartData.data[i]
+			txt:labels()[i]+":"+chartData.data[i]
 		});
 	}
 	d3.select('svg').selectAll('g').remove();
@@ -91,6 +100,9 @@ defineExpose({
 	createBubble
 })
 onMounted(()=>{
+	createBubble(props.chartData)
+})
+watch(labels,()=>{
 	createBubble(props.chartData)
 })
 </script>

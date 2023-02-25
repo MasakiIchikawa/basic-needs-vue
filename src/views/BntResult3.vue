@@ -2,17 +2,17 @@
 import {useRoute} from "vue-router"
 import axios from "axios"
 import {useI18n} from "vue-i18n"
-import BarChart from "../components/BarChart.vue";
+import RadarChart from "../components/RadarChart.vue";
 import {onMounted,onUpdated,defineComponent,ref,reactive } from "vue"
 import {Config} from '../components/Const.vue'
 
-defineComponent({BarChart})
+defineComponent({RadarChart})
 const route = useRoute()
 const {t} = useI18n()
 const token = route.params.token
 const needsData = reactive([0,0,0,0,0])
-const needsLabel = reactive(['','','','',''])
-const barChart = ref()
+const chart_type = ref('')
+const radarChart = ref()
 
 const fillData= () => {
 	axios.post("/api/bnt/get_result",{token:token})
@@ -23,13 +23,15 @@ const fillData= () => {
 		needsData[2] = res.data[2]
 		needsData[3] = res.data[3]
 		needsData[4] = res.data[4]
+		chart_type.value = route.params.chart_type;
+		radarChart.value.updateChart()
 	})
 }
 onMounted(()=>{
 	fillData()
 })
 onUpdated(()=>{
-	barChart.value.updateChart()
+	radarChart.value.updateChart()
 })
 const style0 = () => {return {'--bgcolor':Config.NEEDS_COLOR[0]};}
 const style1 = () => {return {'--bgcolor':Config.NEEDS_COLOR[1]};}
@@ -46,8 +48,8 @@ const style4 = () => {return {'--bgcolor':Config.NEEDS_COLOR[4]};}
 		<div class="card-header">{{$t('word.result_title')}}</div>
 		<div class="card-body text-center">
 			<div class="text-right">
-				<bar-chart ref="barChart" :needs-data="needsData" :needs-label="needsLabel" />
-				<router-link :to="`/result3/${token}`" class="btn btn-primary">{{$t('word.display_radar')}}</router-link>
+				<radar-chart ref="radarChart" :needsData="needsData" />
+				<router-link :to="`/result2/${token}`" class="btn btn-primary">{{$t('word.display_bar')}}</router-link>
 			</div><br />
 
 			<div class="border p-2 border-danger text-danger">
