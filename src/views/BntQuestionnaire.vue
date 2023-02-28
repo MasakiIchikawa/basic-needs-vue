@@ -105,8 +105,8 @@ const set_questionnaire = () => {
 <main class="py-4">
 	<div class="container form-group">
 	<div class="card">
-		<div class="card-header">{{$t('sentence.questionnaire_title')}}</div>
 		<div class="card-body">
+			{{$t('sentence.questionnaire_title')}}<br /><br />
 			<error-message :errors="errors" />
 			<div class="row">
 				<div class="label col-md-3">{{$t('word.sex')}}</div>

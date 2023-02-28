@@ -37,11 +37,11 @@ const fillData = () => {
 		chartData['backgroundColor'] = Config.NEEDS_COLOR
 	})
 }
-const style0 = () => { return {'--bgcolor':Config.NEEDS_COLOR[0]}}
-const style1 = () => {return{'--bgcolor':Config.NEEDS_COLOR[1]}}
-const style2 = () => {return{'--bgcolor':Config.NEEDS_COLOR[2]}}
-const style3 = () => {return{'--bgcolor':Config.NEEDS_COLOR[3]}}
-const style4 = () => {return{'--bgcolor':Config.NEEDS_COLOR[4]}}
+const style0 = () => { return Config.NEEDS_COLOR[0]}
+const style1 = () => {return Config.NEEDS_COLOR[1]}
+const style2 = () => {return Config.NEEDS_COLOR[2]}
+const style3 = () => {return Config.NEEDS_COLOR[3]}
+const style4 = () => {return Config.NEEDS_COLOR[4]}
 onMounted(() => {
 	fillData()
 	loaded=1
@@ -51,76 +51,156 @@ onMounted(() => {
 <template><div id="bnt-body">
 <bnt-locale-header @fill-data="fillData" />
 <main class="py-4">
-	<div class="container form-group">
-	<div class="card">
-		<div class="card-header">{{$t('word.result_title')}}</div>
+	<div class="container form-group"><div class="card">
 		<div class="card-body text-center">
+			<h1>{{$t('word.result_title')}}</h1>
+			<span class="result">RESULT</span><br />
+			<br />
+			{{$t('sentence.send_email_message')}}<br />
+			<br />
 			<bubble-chart v-if="loaded" :chart-data="chartData" ref="bubble1" />
 			<br />
-			<div class="border p-2 border-danger text-danger">
+			<div class="result_alert">
 				{{$t('sentence.result_alert')}}
 			</div><br />
-			<router-link :to="`/result2/${token}`" class="btn btn-primary">{{$t('word.display_graph')}}</router-link>
+			<router-link :to="`/result2/${token}`" class="btn btn-graph">
+				{{$t('word.display_graph')}}
+				<span class="fas fa-caret-right"></span>
+			</router-link>
 			<br /><br />
-			<div class="row border-top">
-				<div class="col-md-4 label alert fas fa-medkit need" :style="style0">
-					{{$t('word.needs_survival')}}&nbsp;:&nbsp;{{needs[0]}}
+			<div class="row">
+				<div class="col-md-4 label">
+					<div class="input-group">
+						<div class="input-group-text need-label" :style="'border-color:'+style0()+';'">
+							<span class="fas fa-medkit" />{{t('word.needs_survival')}}
+						</div>
+						<div class="input-group-text" :style="'background-color:'+style0()+';border-color:'+style0()+';'">{{needs[0]}}</div>
+					</div>
 				</div>
 				<div class="col-md-8 raw_text text-left" style="white-space:pre-line">
 					{{$t('sentence.content_need0')}}<br /><br />
 				</div>
 			</div>
-			<div class="row border-top">
-				<div class="col-md-4 label alert fas fa-heart need" :style="style1">
-					{{$t('word.needs_love')}}&nbsp;:&nbsp;{{needs[1]}}
+			<div class="row">
+				<div class="col-md-4 label">
+					<div class="input-group">
+						<div class="input-group-text need-label" :style="'border-color:'+style1()+';'">
+							<span class="fas fa-heart" />{{t('word.needs_love')}}
+						</div>
+						<div class="input-group-text" :style="'background-color:'+style1()+';border-color:'+style1()+';'">{{needs[1]}}</div>
+					</div>
 				</div>
 				<div class="col-md-8 raw_text text-left" style="white-space:pre-line">
 					{{$t('sentence.content_need1')}}<br /><br />
 				</div>
 			</div>
-			<div class="row border-top">
-				<div class="col-md-4 label alert fas fa-medal need" :style="style2">
-					{{$t('word.needs_power')}}&nbsp;:&nbsp;{{needs[2]}}
+			<div class="row">
+				<div class="col-md-4 label">
+					<div class="input-group">
+						<div class="input-group-text need-label" :style="'border-color:'+style2()+';'">
+							<span class="fas fa-medal" />{{t('word.needs_power')}}
+						</div>
+						<div class="input-group-text" :style="'background-color:'+style2()+';border-color:'+style2()+';'">{{needs[2]}}</div>
+					</div>
 				</div>
 				<div class="col-md-8 raw_text text-left" style="white-space:pre-line">
 					{{$t('sentence.content_need2')}}<br /><br />
 				</div>
 			</div>
-			<div class="row border-top">
-				<div class="col-md-4 label alert fas fa-dove need" :style="style3">
-					{{$t('word.needs_freedom')}}&nbsp;:&nbsp;{{needs[3]}}
+			<div class="row">
+				<div class="col-md-4 label">
+					<div class="input-group">
+						<div class="input-group-text need-label" :style="'border-color:'+style3()+';'">
+							<span class="fas fa-dove" />{{t('word.needs_freedom')}}
+						</div>
+						<div class="input-group-text" :style="'background-color:'+style3()+';border-color:'+style3()+';'">{{needs[3]}}</div>
+					</div>
 				</div>
 				<div class="col-md-8 raw_text text-left" style="white-space:pre-line">
 					{{$t('sentence.content_need3')}}<br /><br />
 				</div>
 			</div>
-			<div class="row border-top">
-				<div class="col-md-4 label alert fas fa-grin-squint need" :style="style4">
-					{{$t('word.needs_fun')}}&nbsp;:&nbsp;{{needs[4]}}
+			<div class="row">
+				<div class="col-md-4 label">
+					<div class="input-group">
+						<div class="input-group-text need-label" :style="'border-color:'+style4()+';'">
+							<span class="fas fa-grin-squint" />{{t('word.needs_fun')}}
+						</div>
+						<div class="input-group-text" :style="'background-color:'+style4()+';border-color:'+style4()+';'">{{needs[4]}}</div>
+					</div>
 				</div>
 				<div class="col-md-8 raw_text text-left" style="white-space:pre-line">
 					{{$t('sentence.content_need4')}}<br /><br />
 				</div>
 			</div>
-			<hr />
-			<div class="text-left">{{$t('sentence.ct_content')}}</div>
-			<div class="text-center"><a target="_blank" href="https://choicetheorist.com">{{$t('word.rtnpo_name')}}</a></div>
-
+			<div class="text-start ct-content">{{$t('sentence.ct_content')}}</div>
+			<div class="text-center">
+				<a target="_blank" class="btn btn-oneday" href="https://peace-tea.jp/ct/ct-oneday/">
+					{{$t('word.rt_oneday')}}
+					<span class="fas fa-caret-right"></span>
+				</a>
+			</div>
 		</div>
-	</div>
-
-	<div class="card"><div class="card-body" style="white-space:bre-wrap;">
-		{{$t('sentence.send_email_message')}}<br />
 	</div></div>
-
-	</div>
 </main>
 <bnt-footer />
 </div></template>
 
 <style scoped>
+h1{
+	font-size:4em;
+}
+.result{
+	background: #ffa89e;
+    color: white;
+    border-radius: 5px;
+    padding: 3px 10px;
+    letter-spacing: 3px;
+}
 .need{
 	background-color:var(--bgcolor);
+}
+.card{
+	white-space:pre-line;
+}
+.result_alert{
+	color:#ff8075;
+}
+.btn-graph{
+	background-color: white;
+    color: #ffa89e;
+    padding: 15px 60px 15px 40px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+.btn-oneday{
+	background-color: #ffa89e;
+    color: white;
+    padding: 15px 60px 15px 40px;
+    border-radius: 40px;
+    font-weight: 600;
+}
+.fa-caret-right{
+	position: absolute;
+    right: 20px;
+    top: 35%;
+}
+.input-group{
+	justify-content:center;
+	margin-bottom:20px;
+	margin-top:20px;
+}
+.input-group-text{
+	border-radius:30px;
+	padding:15px 20px;
+	border-width:4px;
+	font-weight:700;
+}
+.need-label{
+	background-color:white;
+}
+.ct-content{
+	font-size:0.9em;
 }
 </style>
 

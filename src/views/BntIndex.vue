@@ -39,22 +39,28 @@ const set_collaborator = () => {
 		<div class="container form-group">
 		<div class="card">
 			<div class="card-body" style="white-space:pre-line;">
-				{{$t('sentence.start_message')}}<br /><br />
-			</div>
-		</div>
-		<div class="card">
-			<div class="card-header">{{$t('sentence.start_title')}}</div>
-			<div class="card-body" style="white-space:pre-line;">
-				{{$t('sentence.start_description')}}<br />
-				<div class="card" style="margin:10px;">
-					<div class="card-header">{{$t('sentence.example_question')}}</div>
-					<div class="card-body d-grid">
-						<button class="btn btn-outline-primary my-2" disabled>{{$t('word.level5')}}</button>
-						<button class="btn btn-outline-primary my-2" disabled>{{$t('word.level4')}}</button>
-						<button class="btn btn-outline-primary my-2" disabled>{{$t('word.level3')}}</button>
-						<button class="btn btn-outline-primary my-2" disabled>{{$t('word.level2')}}</button>
-						<button class="btn btn-outline-primary my-2" disabled>{{$t('word.level1')}}</button>
+				<div class="typo pc">
+					<img class="typo-copy" src="../assets/img/copy_pc.png" /><br />
+					<img src="../assets/img/main_typo_pc.jpg" />
+				</div>
+				<div class="typo sp">
+					<img class="typo-copy" src="../assets/img/copy_sp.png" /><br />
+					<img src="../assets/img/main_typo_sp.png" />
+				</div>
+				<br />
+				<div class="pc description"><div class="row">
+					<div class="col-md-6 start-description">
+						{{$t('sentence.start_description')}}<br />
+						{{$t('sentence.start_description2')}}
 					</div>
+					<div class="sample col-md-6 text-center"><img src="../assets/img/pc_sample.jpg" /></div><br />
+				</div></div>
+				<div class="sp">
+					<div class="start-description">
+						{{$t('sentence.start_description')}}
+					</div><br />
+					<div class="sample text-center"><img src="../assets/img/sp_sample.jpg" /></div><br />
+					<div class="start-description">{{$t('sentence.start_description2')}}</div><br />
 				</div>
 				<error-message :errors="errors" />
 				<div class="row">
@@ -66,23 +72,19 @@ const set_collaborator = () => {
 						<input type="email" class="form-control" v-model="result.email" />
 					</div>
 				</div>
-				<span class="text-danger">{{$t('sentence.privacy_comment')}}</span>
-				{{$t('sentence.email_note')}}<br />
+				<div class="note">
+					{{$t('sentence.privacy_comment')}}<br />
+					{{$t('sentence.email_note')}}<br />
+				</div>
 				<br />
-				<div class="text-center"><button class="btn btn-success" v-on:click="set_collaborator()">{{$t('word.start')}}</button></div>
+				<div class="text-center"><button class="btn btn-success btn-start" v-on:click="set_collaborator()">{{$t('word.start')}}</button></div>
 				<hr />
-				<div class="small text-center">
+				<div class="note text-center">
 					{{$t('sentence.privacy_agree')}}<br />
 					<a href="https://peace-tea.jp/ct/privacy-policy">{{$t('word.privacy_policy')}}</a>
 				</div>
 			</div>
 		</div>
-		<hr />
-		<ul class="small">
-			<li>{{$t('sentence.copyright')}}</li>
-			<li>{{$t('sentence.copyright2')}}</li>
-			<li>{{$t('sentence.copyright3')}}</li>
-		</ul>
 		</div>
 	</main>
 	<bnt-footer />
@@ -90,4 +92,99 @@ const set_collaborator = () => {
 </template>
 
 <style scoped>
+@media (min-width: 768px){
+	.pc{display:block;}
+	.sp{display:none;}
+	.card{
+		border-radius:20px;
+		border:none;
+	}
+	.typo{
+	    margin: 20px auto 0 auto;
+	    width: 580px;
+	    text-align: center;
+    }
+	.typo-copy{
+		width:200px;
+		float:left;
+	}
+	.description{
+		width:80%;
+		margin:0 auto 0 auto;
+	}
+	.start-description{
+		font-size:1em;
+		text-align:left;
+		line-height: 40px;
+    	margin: auto;
+    }
+	.sample{
+		padding: 20px;
+		background-color: #f6f2f1;
+		border-radius: 15px;
+		margin:0 auto 0 auto;
+	}
+    .label{
+    	text-align:right;
+    }
+    .note{
+    	font-size:0.5em;
+    	width:750px;
+    	margin:0 auto 0 auto;
+    }
+}
+@media (max-width:768px){
+	.pc{display:none;}
+	.sp{display:block;}
+	.typo{
+		width:80%;
+		margin:50px auto 0 auto;
+	}
+	.typo-copy{
+		width:70%;
+		float:right;
+	}
+	.start-description{
+		font-size:3.5vw;
+		text-align:center;
+	}
+	.sample{
+		width: 80%;
+		padding: 20px;
+		background-color: #f6f2f1;
+		border-radius: 15px;
+		margin:0 auto 0 auto;
+	}
+	.note{
+		font-size:3vw;
+	}
+}
+.btn-start{
+	border-radius: 50px;
+    padding: 20px 70px 20px 50px;
+    background-color: #ffaca4;
+    border-color: #ffaca4;
+    font-weight: 550;
+}
+.btn-start:before {
+  content: "";
+  position: absolute;
+  top: 46%;
+  right: 35px;
+  width: 10px;
+  height: 2px;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+.btn-start:after {
+  content: "";
+  position: absolute;
+  top: 54%;
+  right: 35px;
+  width: 10px;
+  height: 2px;
+  background: #fff;
+  transform: rotate(-45deg);
+}
 </style>

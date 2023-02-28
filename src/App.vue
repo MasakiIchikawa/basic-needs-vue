@@ -26,20 +26,11 @@ onMounted(() => {
 html{
 	position:relative;
 	min-height:100%;
-	background-image:url('@/assets/img/back.jpg');
+	background-color:#f7f3f2;
+	color:#2c2300;
 }
 body{
 	margin-bottom:60px;
-	font-family:"M PLUS Rounded 1c";
-}
-
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 70px;
-	border-top:solid yellowgreen 10px;
-	background-color:white;
 }
 body > .container {
 	padding: 60px 15px 0;
@@ -71,6 +62,7 @@ body > .container {
 }
 .card{
 	margin-bottom:10px;
+	border-radius:20px;
 }
 
 .form-table{
@@ -86,15 +78,13 @@ body > .container {
 	padding-top:10px;
 }
 
-.navbar{
-	background-color:white;
-	border-bottom:solid yellowgreen 10px;
-}
-
 #app{
-	background-image:url('@/assets/img/back.jpg');
+	background-color:#f7f3f2;
 }
 
+.card-body{
+	color:#2c2300;
+}
 .card-body .header-img{
 	max-width:100%;
 }
@@ -110,13 +100,18 @@ body > .container {
 
 .btn{
 	margin-bottom:3px;
+	background-color:#ffa89e;
+	border-color:#ffa89e;
+	border-radius:20px;
+	margin-top:20px;
 }
 input.form-check-input{
 	margin-bottom:10px;
 }
 
-.form-control{
+.form-control,.form-select{
 	margin-bottom:5px;
+	background-color:#faf8f9;
 }
 
 .modal-body .icon{
@@ -140,11 +135,6 @@ ul.small{
 }
 
 /* 基本的欲求テスト用特殊クラス */
-.btn-outline-primary-ex{
-	color:#3490dc;
-	border-color:#3490dc;
-	background-color:white;
-}
 .btn-outline-primary-ex:hover{
 	color:#3490dc;
 }
@@ -153,5 +143,10 @@ ul.small{
 }
 #navbarSupportedContent{
   flex-grow:unset;
+}
+
+.badge-danger{
+	background-color:#2c2400;
+	border-radius:2px;
 }
 </style>

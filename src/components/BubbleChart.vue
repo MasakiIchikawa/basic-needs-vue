@@ -111,4 +111,13 @@ watch(labels,()=>{
 	<svg id="graph" width="100%" height="500"></svg>
 </div>
 </template>
+<style scoped>
+.border{
+	border:none !important;
+}
+#graph{
+	border-radius:20px;
+	border:solid 4px #ffe1e1;
+}
+</style>
 
