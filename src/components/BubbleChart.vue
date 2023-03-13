@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { onMounted,watch } from 'vue'
 import {useI18n} from 'vue-i18n'
+import * as d3 from "d3"
+
 type ChartData = {
 	data:number[],
-	labels:String[],
-	backgroundColor:String[]
+	labels:string[],
+	backgroundColor:string[]
 }
 const props = defineProps([
 	'chartData'
@@ -21,16 +23,27 @@ const labels = () => ([
 	t('word.needs_freedom'),
 	t('word.needs_fun')
 ])
+interface INode {
+	index:number
+	x:number
+	y:number
+	fx:number|null
+	fy:number|null
+	r:number
+	txt:string
+}
 const createBubble = (chartData:ChartData) => {
-	var width = document.querySelector('svg').clientWidth;
-	var height = document.querySelector('svg').clientHeight;
+	var width = document.querySelector('svg')?.clientWidth ?? 0
+	var height = document.querySelector('svg')?.clientHeight ?? 0
 	var rw,rh;
 	var nodesData = [];
+	
+	// nodesDataにBubbleの大きさと位置、テキスト内容を格納
 	for(var i=0,d=chartData.data.length;i<d;i++){
 		var r = chartData.data[i]*20;
 		rw = r + (width-2*r) * Math.random();
 		rh = r + (height-2*r) * Math.random();
-		nodesData.push({
+		nodesData.push(<INode>{
 			index:i,
 			x:rw,
 			y:rh,
@@ -38,36 +51,42 @@ const createBubble = (chartData:ChartData) => {
 			txt:labels()[i]+":"+chartData.data[i]
 		});
 	}
-	d3.select('svg').selectAll('g').remove();
+	
+	// ドラッグ可能なオブジェクトgを生成
+	d3.select('svg').selectAll('g').remove()
+	
+	const drag = d3.drag<SVGCircleElement, INode>()
+	.on('start',function (event,d){
+		if(!event.active)simulation.alphaTarget(0.3).restart()
+		d.fx = d.x
+		d.fy = d.y
+	})
+	.on('drag',function (event,d){
+		d.fx = event.x;
+		d.fy = event.y;
+	})
+	.on('end',function (event,d){
+		d.fx = null;
+		d.fy = null;
+	})
+
 	var nodeGroup = d3.select('svg')
 	.selectAll('g')
-	.data(nodesData)
+	.data<INode>(nodesData)
 	.enter()
-	.append('g')
-	.call(
-		d3.drag()
-		.on('start',function (d){
-			if(!d3.event.active)simulation.alphaTarget(0.3).restart();
-			d.fx = d.x;
-			d.fy = d.y;
-		})
-		.on('drag',function (d){
-			d.fx = d3.event.x;
-			d.fy = d3.event.y;
-		})
-		.on('end',function (d){
-			d.fx = null;
-			d.fy = null;
-		})
-	);
+	.append<SVGCircleElement>('g')
+	.call(drag)
 	var colorScale = chartData.backgroundColor;
 
+	// 色付き円circleを生成
 	nodeGroup
 	.append('circle')
 	.attr('cx',function(d){return d.x;})
 	.attr('cy',function(d){return d.y;})
 	.attr('r',function(d){return d.r;})
 	.attr('fill',function(d){return colorScale[d.index];});
+
+	// 円の中心にテキストを配置
 	nodeGroup
 	.append('text')
 	.attr('x',function(d){return d.x;})
@@ -76,9 +95,10 @@ const createBubble = (chartData:ChartData) => {
 	.attr('dominant-baseline','middle')
 	.style('fill','#000')
 	.text(function(d){return d.txt;});
+	
 	var simulation = d3.forceSimulation()
 	.force(
-		'collide',d3.forceCollide().radius(function(d){return d.r*1.1;})
+		'collide',d3.forceCollide().radius(function(d:any){return d.r*1.1})
 	)
 	.force('charge',d3.forceManyBody())
 	.force(
@@ -87,6 +107,7 @@ const createBubble = (chartData:ChartData) => {
 	.force(
 		'y',d3.forceY().strength(0.03).y(height/2)
 	);
+	
 	simulation.nodes(nodesData).on('tick',function (){
 		nodeGroup.select('circle')
 		.attr('cx',function(d){return d.x;})

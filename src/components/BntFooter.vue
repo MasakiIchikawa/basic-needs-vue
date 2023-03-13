@@ -1,8 +1,13 @@
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+
+const {t} = useI18n()
+</script>
 <template>
 <footer class="footer">
 	<div class="container text-center">
 		<a target="peace-with" href="https://peace-tea.jp/">
-			Copyright(c) 2021- {{$t('word.developer_name')}} All Rights Reserved.
+			Copyright(c) 2021- {{t('word.developer_name')}} All Rights Reserved.
 		</a>
 	</div>
 </footer>

@@ -2,12 +2,12 @@
 import { useI18n } from "vue-i18n";
 import {useStore} from 'vuex'
 
-const t = useI18n()
+const {t,locale} = useI18n()
 const store = useStore()
 
 const changeLocale = () => {
-	var lang=(t.locale.value==='ja')?'en':'ja'
-	t.locale.value = lang
+	var lang=(locale.value==='ja')?'en':'ja'
+	locale.value = lang
 	store.commit('setLang',lang)
 }
 </script>
@@ -21,9 +21,9 @@ const changeLocale = () => {
 				<img width="30" src="../assets/img/rt_logo.png" />
 			</a></div>
 			<div class="brand-right">
-				{{$t('word.title') }}
+				{{t('word.title') }}
 				<button type="button" class="btn btn-light" @click="changeLocale">
-				{{$t('word.change_locale')}}
+				{{t('word.change_locale')}}
 				</button>
 			</div>
 		</div>
@@ -59,7 +59,7 @@ const changeLocale = () => {
 .navbar-brand .brand-left{
 	float:left;
 	height:40px;
-	padding-top:5px;
+	padding-top:2px;
 }
 .navbar-brand .brand-right{
 	float:right;
@@ -70,8 +70,7 @@ const changeLocale = () => {
 		text-align:center;
 	}
 	.navbar-brand{
-		font-size:0.92em;
-		margin-top:3px;
+		font-size:3.5vw;
 	}
 }
 </style>

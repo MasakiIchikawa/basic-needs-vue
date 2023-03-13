@@ -8,7 +8,8 @@ import {useStore} from 'vuex'
 const {t} = useI18n()
 const store = useStore()
 const router = useRouter()
-const errors = reactive([])
+var blankErrors: Array<String> = []
+const errors = reactive(blankErrors)
 const result = reactive({
 	email:null,
 	locale:store.state.lang
@@ -50,38 +51,38 @@ const set_collaborator = () => {
 				<br />
 				<div class="pc description"><div class="row">
 					<div class="col-md-6 start-description">
-						{{$t('sentence.start_description')}}<br />
-						{{$t('sentence.start_description2')}}
+						{{t('sentence.start_description')}}<br />
+						{{t('sentence.start_description2')}}
 					</div>
 					<div class="sample col-md-6 text-center"><img src="../assets/img/pc_sample.jpg" /></div><br />
 				</div></div>
 				<div class="sp">
 					<div class="start-description">
-						{{$t('sentence.start_description')}}
+						{{t('sentence.start_description')}}
 					</div><br />
 					<div class="sample text-center"><img src="../assets/img/sp_sample.jpg" /></div><br />
-					<div class="start-description">{{$t('sentence.start_description2')}}</div><br />
+					<div class="start-description">{{t('sentence.start_description2')}}</div><br />
 				</div>
 				<error-message :errors="errors" />
 				<div class="row">
 					<div class="col-md-3 label">
-						{{$t('word.email')}}
-						<span class="badge badge-danger">{{$t('word.require')}}</span>
+						{{t('word.email')}}
+						<span class="badge badge-danger">{{t('word.require')}}</span>
 					</div>
 					<div class="col-md-6 my-4">
 						<input type="email" class="form-control" v-model="result.email" />
 					</div>
 				</div>
 				<div class="note">
-					{{$t('sentence.privacy_comment')}}<br />
-					{{$t('sentence.email_note')}}<br />
+					{{t('sentence.privacy_comment')}}<br />
+					{{t('sentence.email_note')}}<br />
 				</div>
 				<br />
-				<div class="text-center"><button class="btn btn-success btn-start" v-on:click="set_collaborator()">{{$t('word.start')}}</button></div>
+				<div class="text-center"><button class="btn btn-success btn-start" v-on:click="set_collaborator()">{{t('word.start')}}</button></div>
 				<hr />
 				<div class="note text-center">
-					{{$t('sentence.privacy_agree')}}<br />
-					<a href="https://peace-tea.jp/ct/privacy-policy">{{$t('word.privacy_policy')}}</a>
+					{{t('sentence.privacy_agree')}}<br />
+					<a href="https://peace-tea.jp/ct/privacy-policy">{{t('word.privacy_policy')}}</a>
 				</div>
 			</div>
 		</div>

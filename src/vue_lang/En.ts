@@ -55,6 +55,7 @@ const contents = {
 			display_bar:'Display as a bar graph',
 			year_prepend:'Year',
 			year_append:'',
+			rt_oneday:'Details of the one-day seminar\n(In Japan)',
 		},
 		// メッセージ
 		sentence: {

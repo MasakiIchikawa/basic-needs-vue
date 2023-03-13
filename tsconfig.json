@@ -1,4 +1,6 @@
 {
+  // for bootstrap-vue-next
+  "include": ["components.d.ts"],
   "files": [],
   "references": [
     {
@@ -10,5 +12,6 @@
     {
       "path": "./tsconfig.vitest.json"
     }
-  ]
+  ],
+  "allowjs":true,
 }

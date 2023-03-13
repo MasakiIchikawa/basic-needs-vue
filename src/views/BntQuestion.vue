@@ -4,40 +4,48 @@ import {useI18n} from 'vue-i18n'
 import axios from 'axios'
 import {useRouter,useRoute} from 'vue-router'
 
-const t = useI18n()
+const {t,locale} = useI18n()
 const route = useRoute()
 const router = useRouter()
-const questions = ref(null)
+
+var blankQuestions:Array<any> = []
+const questions = ref(blankQuestions)
 const question_text = ref('')
 const question_number = ref('01')
 const visible_question = ref(false)
 const visible_loading = ref(false)
 const q_index =ref(0)
 const progressRate = ref(0)
+interface IAnswer{
+	id:string
+	value:number
+}
+var answersDefault:Array<IAnswer> = []
 const result = reactive({
 	collaborator_id:route.params.collaborator_id,
-	locale:t.locale.value,
-	answers:{}
+	locale:locale.value,
+	answers:answersDefault
 })
 
 const getProgressRate = () => {
 	return (q_index.value)/51*100
 }
 const getQuestions = () => {
-	axios.get('/api/bnt/get_questions/'+t.locale.value)
+	axios.get('/api/bnt/get_questions/'+locale.value)
 	.then((res) => {
 		questions.value = res.data;
 		question_text.value = getQuestionText();
+		result.locale = locale.value;
 	});
 }
-const questionNext = (event,answer:number) => {
+const questionNext = (event:Event,answer:number) => {
 	if(answer != null){
 		result.answers[q_index.value]={
 			id:questions.value[q_index.value].id,
 			value:answer
 		}
 	}
-	if(q_index.value >= questions.length-1){
+	if(q_index.value >= questions.value.length-1){
 		displayLoading();
 		axios.post('/api/bnt/set_answers/',result)
 		.then((res) => {
@@ -61,17 +69,17 @@ const questionNext = (event,answer:number) => {
 		question_text.value = getQuestionText()
 		question_number.value = getQuestionNumber()
 		progressRate.value = getProgressRate()
-		event.checked = false
+		//event.checked = false
 	}
 }
-const questionBack = (event) => {
+const questionBack = (event:Event) => {
 	if(q_index.value > 0){
 		visible_question.value = false
 		q_index.value--;
 		question_text.value = getQuestionText()
 		question_number.value = getQuestionNumber()
 		progressRate.value = getProgressRate()
-		event.checked = false
+		//event.checked = false
 	}
 }
 const getQuestionText = () => {
@@ -97,7 +105,7 @@ onMounted(() => {
 <template><div id="bnt-body">
 <bnt-header />
 <main class="py-4">
-	<div v-if="visible_loading" id="loading"><div class='loading_text'>$t('sentence.loading')</div></div>
+	<div v-if="visible_loading" id="loading"><div class='loading_text'>t('sentence.loading')</div></div>
 	<div v-if="!visible_loading" class="container form-group">
 	<div class="card" id="question_card">
 		<div class="card-body">
@@ -111,28 +119,28 @@ onMounted(() => {
 			<div class="card-body d-grid">
 				<button id="ans5" class="btn btn-outline-primary-ex my-2" v-on:click="questionNext($event,5)">
 					<span class="btn-circle">5</span>
-					<span class="level-text">{{$t('word.level5')}}</span>
+					<span class="level-text">{{t('word.level5')}}</span>
 				</button>
 				<button id="ans4" class="btn btn-outline-primary-ex my-2" v-on:click="questionNext($event,4)">
 					<span class="btn-circle">4</span>
-					<span class="level-text">{{$t('word.level4')}}</span>
+					<span class="level-text">{{t('word.level4')}}</span>
 				</button>
 				<button id="ans3" class="btn btn-outline-primary-ex my-2" v-on:click="questionNext($event,3)">
 					<span class="btn-circle">3</span>
-					<span class="level-text">{{$t('word.level3')}}</span>
+					<span class="level-text">{{t('word.level3')}}</span>
 				</button>
 				<button id="ans2" class="btn btn-outline-primary-ex my-2" v-on:click="questionNext($event,2)">
 					<span class="btn-circle">2</span>
-					<span class="level-text">{{$t('word.level2')}}</span>
+					<span class="level-text">{{t('word.level2')}}</span>
 				</button>
 				<button id="ans1" class="btn btn-outline-primary-ex my-2" v-on:click="questionNext($event,1)">
 					<span class="btn-circle">1</span>
-					<span class="level-text">{{$t('word.level1')}}</span>
+					<span class="level-text">{{t('word.level1')}}</span>
 				</button>
 				<div class="text-center">
 					<button v-show="q_index > 0" class="btn btn-danger btn-back" v-on:click="questionBack($event)">
 						<i class="fas fa-angle-left"></i>&nbsp;
-						{{$t('word.back_before')}}
+						{{t('word.back_before')}}
 					</button>
 				</div>
 			</div>

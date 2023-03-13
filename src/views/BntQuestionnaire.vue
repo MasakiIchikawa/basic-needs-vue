@@ -8,7 +8,8 @@ const route = useRoute()
 const router = useRouter()
 const {t} = useI18n()
 
-const errors = reactive([])
+var blankErrors: Array<String> = []
+const errors = reactive(blankErrors)
 const result = reactive({
 	token:route.params.token,
 	collaborator_id:route.params.collaborator_id,
@@ -82,11 +83,10 @@ const set_questionnaire = () => {
 	}
 	else if(result.job == 99 && result.other_job == null){
 		var target = t('word.othor_job');
-		errors.push($t('validate.require',{target:target}));
+		errors.push(t('validate.require',{target:target}));
 	}
 	if(result.world_area == null){
-		var target = t('word.world_area');
-		errors.push(t('validate.require',{target:target}));
+		errors.push(t('validate.require',{target:t('word.world_area')}));
 	}
 
 	if(errors.length == 0){
@@ -106,43 +106,43 @@ const set_questionnaire = () => {
 	<div class="container form-group">
 	<div class="card">
 		<div class="card-body">
-			{{$t('sentence.questionnaire_title')}}<br /><br />
+			{{t('sentence.questionnaire_title')}}<br /><br />
 			<error-message :errors="errors" />
 			<div class="row">
-				<div class="label col-md-3">{{$t('word.sex')}}</div>
+				<div class="label col-md-3">{{t('word.sex')}}</div>
 				<div class="col-md-2">
 					<b-form-select v-model="result.sex" :options="getSexSelect()" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="label col-md-3">{{$t('word.birth_year')}}</div>
-				<b-input-group id="birthyear" :prepend="$t('word.year_prepend')" :append="$t('word.year_append')">
-					<b-form-input type="number" name="birth_year" v-model="result.birth_year" :placeholder="$t('word.birth_year_placeholder')" />
+				<div class="label col-md-3">{{t('word.birth_year')}}</div>
+				<b-input-group id="birthyear" :prepend="t('word.year_prepend')" :append="t('word.year_append')">
+					<b-form-input type="number" name="birth_year" v-model="result.birth_year" :placeholder="t('word.birth_year_placeholder')" />
 				</b-input-group>
 			</div>
 			<div class="row">
-				<div class="label col-md-3">{{$t('word.marriage')}}</div>
+				<div class="label col-md-3">{{t('word.marriage')}}</div>
 				<div class="col-md-2">
 					<b-form-select v-model="result.marriage" :options="getMarriageSelect()" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="label col-md-3">{{$t('word.job')}}</div>
+				<div class="label col-md-3">{{t('word.job')}}</div>
 				<div class="col-md-2">
 					<b-form-select v-model="result.job" :options="getJobSelect()" />
 				</div>
 				<div class="col-md-5">
-					<input v-if="result.job==99" type="text" class="form-control" v-model="result.other_job" :placeholder="$t('word.other_job')" />
+					<input v-if="result.job==99" type="text" class="form-control" v-model="result.other_job" :placeholder="t('word.other_job')" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="label col-md-3">{{$t('word.world_area')}}</div>
+				<div class="label col-md-3">{{t('word.world_area')}}</div>
 				<div class="col-md-2">
 					<b-form-select v-model="result.world_area" :options="getWorldAreaSelect()" />
 				</div>
 			</div>
 
-			<div class="text-center"><button class="btn btn-primary" v-on:click="set_questionnaire()">{{$t('word.complete')}}</button></div>
+			<div class="text-center"><button class="btn btn-primary" v-on:click="set_questionnaire()">{{t('word.complete')}}</button></div>
 		</div>
 	</div>
 	</div>

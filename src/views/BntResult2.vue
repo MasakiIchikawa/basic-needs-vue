@@ -3,10 +3,14 @@ import {useRoute} from "vue-router"
 import axios from "axios"
 import {useI18n} from "vue-i18n"
 import BarChart from "../components/BarChart.vue";
+import NeedsDescription from "@/components/NeedsDescription.vue"
 import {onMounted,onUpdated,defineComponent,ref,reactive } from "vue"
-import {Config} from '../components/Const.vue'
+import {Config} from '../components/Const'
 
-defineComponent({BarChart})
+defineComponent({
+	BarChart,
+	NeedsDescription
+})
 const route = useRoute()
 const {t} = useI18n()
 const token = route.params.token
@@ -23,6 +27,7 @@ const fillData= () => {
 		needsData[2] = res.data[2]
 		needsData[3] = res.data[3]
 		needsData[4] = res.data[4]
+		barChart.value.updateChart()
 	})
 }
 onMounted(()=>{
@@ -43,75 +48,63 @@ const style4 = () => {return {'--bgcolor':Config.NEEDS_COLOR[4]};}
 <main class="py-4">
 	<div class="container form-group">
 	<div class="card">
-		<div class="card-header">{{$t('word.result_title')}}</div>
 		<div class="card-body text-center">
+			<h1>{{t('word.result_title')}}</h1>
+			<span class="result">RESULT</span><br />
+			<br />
 			<div class="text-right">
 				<bar-chart ref="barChart" :needs-data="needsData" :needs-label="needsLabel" />
-				<router-link :to="`/result3/${token}`" class="btn btn-primary">{{$t('word.display_radar')}}</router-link>
+				<router-link :to="`/result3/${token}`" class="btn btn-primary">{{t('word.display_radar')}}</router-link>
 			</div><br />
 
-			<div class="border p-2 border-danger text-danger">
-				{{$t('sentence.result_alert')}}
-			</div><br />
-
-			<div class="row border-top">
-				<div class="col-md-3 label alert fas fa-medkit need" :style="style0">
-					{{t('word.needs_survival')}}&nbsp;:&nbsp;{{needsData[0]}}
-				</div>
-				<div class="col-md-9 raw_text text-left" style="white-space:pre-line">
-					{{$t('sentence.content_need0')}}<br /><br />
-				</div>
-			</div>
-			<div class="row border-top">
-				<div class="col-md-3 label alert fas fa-heart need" :style="style1">
-					{{t('word.needs_love')}}&nbsp;:&nbsp;{{needsData[1]}}
-				</div>
-				<div class="col-md-9 raw_text text-left" style="white-space:pre-line">
-					{{$t('sentence.content_need1')}}<br /><br />
-				</div>
-			</div>
-			<div class="row border-top">
-				<div class="col-md-3 label alert fas fa-medal need" :style="style2">
-					{{t('word.needs_power')}}&nbsp;:&nbsp;{{needsData[2]}}
-				</div>
-				<div class="col-md-9 raw_text text-left" style="white-space:pre-line">
-					{{$t('sentence.content_need2')}}<br /><br />
-				</div>
-			</div>
-			<div class="row border-top">
-				<div class="col-md-3 label alert fas fa-dove need" :style="style3">
-					{{t('word.needs_freedom')}}&nbsp;:&nbsp;{{needsData[3]}}
-				</div>
-				<div class="col-md-9 raw_text text-left" style="white-space:pre-line">
-					{{$t('sentence.content_need3')}}<br /><br />
-				</div>
-			</div>
-			<div class="row border-top">
-				<div class="col-md-3 label alert fas fa-grin-squint need" :style="style4">
-					{{t('word.needs_fun')}}&nbsp;:&nbsp;{{needsData[4]}}
-				</div>
-				<div class="col-md-9 raw_text text-left" style="white-space:pre-line">
-					{{$t('sentence.content_need4')}}<br /><br />
-				</div>
-			</div>
-			<hr />
-			<div class="text-left">{{$t('sentence.ct_content')}}</div>
-			<div class="text-center"><a target="_blank" href="https://choicetheorist.com">{{$t('word.rtnpo_name')}}</a></div>
-
+			<div class="result_alert">
+				{{t('sentence.result_alert')}}
+			</div><br /><br />
+			<needs-description :needs-data="needsData" />
 		</div>
-	</div>
-
-	<div class="card"><div class="card-body" style="white-space:bre-wrap;">
-		{{$t('sentence.send_email_message')}}<br />
 	</div></div>
-
-	</div>
 </main>
 <bnt-footer />
 </div></template>
 
 <style scoped>
+h1{
+	font-size:4em;
+}
+.result{
+	background: #ffa89e;
+    color: white;
+    border-radius: 5px;
+    padding: 3px 10px;
+    letter-spacing: 3px;
+}
 .need{
 	background-color:var(--bgcolor);
+}
+.card{
+	white-space:pre-line;
+}
+.result_alert{
+	color:#ff8075;
+}
+.btn-graph{
+	background-color: white;
+    color: #ffa89e;
+    padding: 15px 60px 15px 40px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+.fa-caret-right{
+	position: absolute;
+    right: 20px;
+    top: 35%;
+}
+@media (max-width:768px){
+	h1{
+		font-size:10vw;
+	}
+	.result_alert{
+		font-size:3vw;
+	}
 }
 </style>

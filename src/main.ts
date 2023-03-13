@@ -4,9 +4,7 @@ import {createI18n} from 'vue-i18n'
 import App from './App.vue'
 import router from './router'
 
-import {messages,dateTimeFormats,numberFormats} from "@/vue_lang/index.js"
-
-import {BInputGroup,BFormInput,BFormSelect} from 'bootstrap-vue-next'
+import {messages,dateTimeFormats,numberFormats} from "./vue_lang/index"
 
 import GuestMenu from "./components/GuestMenu.vue"
 import ErrorMessage from "./components/ErrorMessage.vue"
@@ -49,9 +47,6 @@ app.use(i18n)
 app.use(store)
 app.use(router)
 
-app.component('b-form-input',BFormInput)
-app.component('b-input-group',BInputGroup)
-app.component('b-form-select',BFormSelect)
 app.component('guest-menu',GuestMenu)
 app.component('error-message',ErrorMessage)
 app.component('info-message',InfoMessage)

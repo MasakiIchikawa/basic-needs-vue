@@ -10,7 +10,7 @@ import {
   Legend
 } from 'chart.js'
 import { Radar } from 'vue-chartjs'
-import {Config} from '../components/Const.vue'
+import {Config} from '../components/Const'
 import {useI18n} from "vue-i18n"
 import { ref } from 'vue';
 
@@ -29,9 +29,6 @@ const radarChart = ref()
 const props = defineProps<{
   needsData:number[],
 }>()
-const data = ref<ChartData<'radar'>>({
-  datasets: []
-})
 const createData = () => ({
 	labels: [
 		t('word.needs_survival'),
@@ -53,12 +50,13 @@ const createData = () => ({
 		}
 	]
 })
+const data = ref(createData())
 const options = reactive({
 	responsive:true,
 	responsiveAnimationDuration:0,
 	maintainAspectRatio:true,
 	layout:{padding:0},
-	legend:{display:false},
+//	legend:{display:false},
   scales: {
       r: {
           suggestedMin: 0,
@@ -69,7 +67,10 @@ const options = reactive({
 		pointLabels:{fontSize:16},
 		angleLines:{display:true},
 		ticks:{stepSize:1}
-	}
+	},
+  plugins:{
+    legend:{display:false}
+  }
 })
 const updateChart = () => {
 	data.value = createData()
@@ -81,4 +82,13 @@ defineExpose({
 <template>
   <Radar :data="data" :options="options" />
 </template>
+<style scoped>
+.border{
+	border:none !important;
+}
+#graph{
+	border-radius:20px;
+	border:solid 4px #ffe1e1;
+}
+</style>
 

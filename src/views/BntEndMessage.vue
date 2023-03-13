@@ -14,7 +14,7 @@ const token = route.params.token
 	<div class="container form-group">
 	<div class="card">
 		<div class="card-body" style="white-space:pre-line;">
-			{{$t('sentence.end_message')}}<br />
+			{{t('sentence.end_message')}}<br />
 			<br />
 			<div class="text-center"><router-link :to="{name:'bnt.result',params:{token:token}}">
 				<button class="btn btn-success">{{t('word.display_result')}}</button>

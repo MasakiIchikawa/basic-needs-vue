@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import Config from "./Const.vue"
+import { useI18n } from "vue-i18n";
+
+const {t} = useI18n()
 </script>
 <template>
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
@@ -10,7 +12,7 @@ import Config from "./Const.vue"
 				<img width="30" src="../assets/img/rt_logo.png" />
 			</a></div>
 			<div class="brand-right">
-				{{$t('word.title') }}
+				{{t('word.title') }}
 			</div>
 		</div>
 	</div>

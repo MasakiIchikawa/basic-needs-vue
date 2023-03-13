@@ -11,7 +11,7 @@ import {
   LinearScale,
 } from 'chart.js'
 import type {ChartData} from 'chart.js'
-import {Config} from '../components/Const.vue'
+import {Config} from '../components/Const'
 import {useI18n} from "vue-i18n"
 import { ref } from 'vue';
 
@@ -52,7 +52,7 @@ const options = reactive({
     y:{min:0,max:5}
   },
   plugins:{
-    legend:false
+    legend:{display:false}
   }
 })
 const updateChart = () => {
@@ -70,3 +70,13 @@ defineExpose({
     :data="data"
   />
 </template>
+<style scoped>
+.border{
+	border:none !important;
+}
+#graph{
+	border-radius:20px;
+	border:solid 4px #ffe1e1;
+}
+</style>
+
