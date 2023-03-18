@@ -4,6 +4,7 @@ import {useI18n} from 'vue-i18n'
 import axios from 'axios'
 import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
+import {Config} from "@/components/Const"
 
 const {t} = useI18n()
 const store = useStore()
@@ -21,10 +22,11 @@ const set_collaborator = () => {
 		errors.push(t('validate.require',{target:target}));
 	}
 	else{
-		axios.post('/api/bnt/set_collaborator/',result)
+		axios.post(Config.API_URL+'/set_collaborator/',result)
 		.then((res) => {
-			console.log(res);
-			router.push({name:'bnt.question',params:{collaborator_id:res.data}});
+			console.log(res)
+			store.commit('setCollaboratorId',res.data)
+			router.push({name:'bnt.question'});
 		})
 		.catch(error => {
 			console.log(error.response);

@@ -20,13 +20,13 @@ export default defineConfig({
   },
   server: {
     port:8080,
-    proxy: {
+/*    proxy: {
       "/api": {
         target: "https://light.peace-tea.jp",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, "/rt"),
       },
-    },
+    },*/
   },
 })

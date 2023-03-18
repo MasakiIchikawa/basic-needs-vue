@@ -3,16 +3,19 @@ import {reactive} from 'vue'
 import {useRoute,useRouter} from 'vue-router'
 import {useI18n} from 'vue-i18n'
 import axios from 'axios'
+import {Config} from '@/components/Const'
+import {useStore} from 'vuex'
 
 const route = useRoute()
 const router = useRouter()
 const {t} = useI18n()
+const store = useStore()
 
 var blankErrors: Array<String> = []
 const errors = reactive(blankErrors)
 const result = reactive({
-	token:route.params.token,
-	collaborator_id:route.params.collaborator_id,
+	token:store.state.token,
+	collaborator_id:store.state.collaborator_id,
 	sex:null,
 	birth_year:null,
 	marriage:null,
@@ -91,10 +94,10 @@ const set_questionnaire = () => {
 
 	if(errors.length == 0){
 		// register result
-		axios.post('/api/bnt/set_questionnaire',result)
+		axios.post(Config.API_URL+'/set_questionnaire',result)
 		.then((res) => {
 			console.log(res);
-			router.push({name:'bnt.end_message',params:{token:result.token}});
+			router.push({name:'bnt.end_message'});
 		});
 	}
 }

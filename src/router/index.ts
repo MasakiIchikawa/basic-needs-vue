@@ -16,6 +16,7 @@ const router = createRouter({
     {path:'/questionnaire',name:'bnt.questionnaire',component:BntQuestionnaire},
     {path:'/end_message',name:'bnt.end_message',component:BntEndMessage},
     {path:'/result/:token',name:'bnt.result/:token',component:BntResult},
+    {path:'/result/',name:'bnt.result',component:BntResult},
     {path:'/result2/:token',name:'bnt.result2/:token',component:BntResult2},
     {path:'/result3/:token',name:'bnt.result3/:token',component:BntResult3},
   ]

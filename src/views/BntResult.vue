@@ -6,13 +6,15 @@ import {Config} from "@/components/Const"
 import {useRoute} from "vue-router"
 import axios from "axios"
 import {useI18n} from "vue-i18n"
+import {useStore} from "vuex"
 
 defineComponent({
 	BubbleChart,
 	NeedsDescription
 })
 const route = useRoute()
-const token = route.params.token
+const store = useStore()
+const token = route.params.token == undefined ? store.state.token : route.params.token
 const {t} = useI18n()
 const chart_type = ref(null)
 const needs = ref([0,0,0,0,0])
@@ -24,7 +26,7 @@ const chartData = reactive({
 const bubble1 = ref()
 let loaded = 0
 const fillData = () => {
-	axios.post("/api/bnt/get_result",{token:token})
+	axios.post(Config.API_URL+"/get_result",{token:token})
 	.then((res) => {
 		console.log(res)
 		needs.value = res.data

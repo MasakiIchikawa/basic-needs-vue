@@ -30,11 +30,19 @@ const i18n = createI18n({
 
 const store = createStore({
   state:{
-    lang:language
+    lang:language,
+    collaborator_id:String(''),
+    token:String('')
   },
   mutations:{
     setLang(state,value){
       state.lang = value
+    },
+    setCollaboratorId(state,value){
+      state.collaborator_id = value
+    },
+    setToken(state,value){
+      state.token = value
     }
   },
   actions:{},

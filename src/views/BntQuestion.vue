@@ -3,10 +3,13 @@ import {ref,reactive,onMounted} from 'vue'
 import {useI18n} from 'vue-i18n'
 import axios from 'axios'
 import {useRouter,useRoute} from 'vue-router'
+import {Config} from '@/components/Const'
+import {useStore} from 'vuex'
 
 const {t,locale} = useI18n()
 const route = useRoute()
 const router = useRouter()
+const store = useStore()
 
 var blankQuestions:Array<any> = []
 const questions = ref(blankQuestions)
@@ -22,7 +25,7 @@ interface IAnswer{
 }
 var answersDefault:Array<IAnswer> = []
 const result = reactive({
-	collaborator_id:route.params.collaborator_id,
+	collaborator_id:store.state.collaborator_id,
 	locale:locale.value,
 	answers:answersDefault
 })
@@ -31,7 +34,7 @@ const getProgressRate = () => {
 	return (q_index.value)/51*100
 }
 const getQuestions = () => {
-	axios.get('/api/bnt/get_questions/'+locale.value)
+	axios.get(Config.API_URL+'/get_questions/'+locale.value)
 	.then((res) => {
 		questions.value = res.data;
 		question_text.value = getQuestionText();
@@ -47,20 +50,20 @@ const questionNext = (event:Event,answer:number) => {
 	}
 	if(q_index.value >= questions.value.length-1){
 		displayLoading();
-		axios.post('/api/bnt/set_answers/',result)
+		axios.post(Config.API_URL+'/set_answers/',result)
 		.then((res) => {
 			visible_loading.value = false
-			var params = res.data;
-			params['collaborator_id'] = result.collaborator_id;
-			if(params['q_flg'] == true){
-				router.push({name:'bnt.questionnaire',params:params});
+			store.commit('setToken',res.data['token'])
+			if(res.data['q_flg'] == true){
+				router.push({name:'bnt.questionnaire'})
 			}
 			else{
-				router.push({name:'bnt.end_message',params:params});
+				router.push({name:'bnt.end_message'})
 			}
 		})
 		.catch(err => {
 			alert(t('sentence.analyse_error'));
+			console.log(err)
 		});
 	}
 	else{
@@ -105,7 +108,7 @@ onMounted(() => {
 <template><div id="bnt-body">
 <bnt-header />
 <main class="py-4">
-	<div v-if="visible_loading" id="loading"><div class='loading_text'>t('sentence.loading')</div></div>
+	<div v-if="visible_loading" id="loading"><div class='loading_text'>{{t('sentence.loading')}}</div></div>
 	<div v-if="!visible_loading" class="container form-group">
 	<div class="card" id="question_card">
 		<div class="card-body">

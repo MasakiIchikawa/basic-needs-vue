@@ -1,9 +1,8 @@
 {
-  "function": {
-    "basicneeds1be6b02b": {
-      "build": true,
+  "hosting": {
+    "S3AndCloudFront": {
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
+      "service": "S3AndCloudFront"
     }
   }
 }

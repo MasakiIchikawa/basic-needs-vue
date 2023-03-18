@@ -19,7 +19,7 @@ const needsLabel = reactive(['','','','',''])
 const barChart = ref()
 
 const fillData= () => {
-	axios.post("/api/bnt/get_result",{token:token})
+	axios.post(Config.API_URL+"/get_result",{token:token})
 	.then((res) => {
 		console.log(res);
 		needsData[0] = res.data[0]
