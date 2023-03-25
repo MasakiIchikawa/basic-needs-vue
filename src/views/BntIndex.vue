@@ -33,6 +33,9 @@ const set_collaborator = () => {
 		})
 	}
 }
+const getLocale = () => {
+	return store.state.lang
+}
 </script>
 
 <template>
@@ -42,13 +45,31 @@ const set_collaborator = () => {
 		<div class="container form-group">
 		<div class="card">
 			<div class="card-body" style="white-space:pre-line;">
-				<div class="typo pc">
+				<div v-if="getLocale() == 'ja'" class="typo pc">
 					<img class="typo-copy" src="../assets/img/copy_pc.png" /><br />
-					<img src="../assets/img/main_typo_pc.jpg" />
+					<div class="title title-jp">{{t('word.title')}}</div>
+					<div class="text-center">
+						<span class="subtitle">BASIC NEEDS SURVEY</span>
+					</div>
 				</div>
-				<div class="typo sp">
+				<div v-if="getLocale() == 'en'" class="typo pc">
+					<div class="text-center">
+						<span class="subtitle">With somewone important</span>
+					</div>
+					<div v-if="getLocale() == 'en'" class="title title-en">{{t('word.title')}}</div>
+				</div>
+				<div v-if="getLocale() == 'ja'" class="typo sp">
 					<img class="typo-copy" src="../assets/img/copy_sp.png" /><br />
-					<img src="../assets/img/main_typo_sp.png" />
+					<div class="title title-jp">{{t('word.sp_title')}}</div>
+					<div class="text-center">
+						<span class="subtitle">BASIC NEEDS SURVEY</span>
+					</div>
+				</div>
+				<div v-if="getLocale() == 'en'" class="typo sp">
+					<div class="text-center">
+						<span class="subtitle">With somewone important</span>
+					</div>
+					<div class="title title-en">{{t('word.title')}}</div>
 				</div>
 				<br />
 				<div class="pc description"><div class="row">
@@ -56,13 +77,19 @@ const set_collaborator = () => {
 						{{t('sentence.start_description')}}<br />
 						{{t('sentence.start_description2')}}
 					</div>
-					<div class="sample col-md-6 text-center"><img src="../assets/img/pc_sample.jpg" /></div><br />
+					<div class="sample col-md-6 text-center">
+						<img v-if="getLocale() == 'ja'" src="../assets/img/pc_sample.jpg" />
+						<img v-if="getLocale() == 'en'" src="../assets/img/pc_sample_en.jpg" />
+					</div><br />
 				</div></div>
 				<div class="sp">
 					<div class="start-description">
 						{{t('sentence.start_description')}}
 					</div><br />
-					<div class="sample text-center"><img src="../assets/img/sp_sample.jpg" /></div><br />
+					<div class="sample text-center">
+						<img v-if="getLocale() =='ja'" src="../assets/img/sp_sample.jpg" />
+						<img v-if="getLocale() == 'en'" src="../assets/img/sp_sample_en.jpg" />
+					</div><br />
 					<div class="start-description">{{t('sentence.start_description2')}}</div><br />
 				</div>
 				<error-message :errors="errors" />
@@ -95,9 +122,28 @@ const set_collaborator = () => {
 </template>
 
 <style scoped>
+.title{
+    letter-spacing: 8px;
+    color: #2c2300;
+}
+.subtitle{
+	background-color: #ffaca4;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-left: auto;
+}
 @media (min-width: 768px){
 	.pc{display:block;}
 	.sp{display:none;}
+	.title-jp{
+	    padding-top: 30px;
+		font-size:52px;
+	}
+	.title-en{
+		font-size:52px;
+	}
 	.card{
 		border-radius:20px;
 		border:none;
@@ -139,6 +185,15 @@ const set_collaborator = () => {
 @media (max-width:768px){
 	.pc{display:none;}
 	.sp{display:block;}
+	.title-jp{
+	    padding-top: 30px;
+		font-size:60px;
+	}
+	.title-en{
+	    padding-top: 30px;
+		font-size:34px;
+		text-align:center;
+	}
 	.typo{
 		width:80%;
 		margin:50px auto 0 auto;

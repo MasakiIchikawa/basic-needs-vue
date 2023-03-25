@@ -3,6 +3,7 @@ const contents = {
 		// 単語
 		word: {
 			title:'基本的欲求診断',
+			sp_title:'基本的\n欲求診断',
 			developer:'開発元',
 			developer_name:'PEACEwith Masaki Ichikawa',
 			require:'必須',
