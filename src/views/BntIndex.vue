@@ -123,7 +123,7 @@ const getLocale = () => {
 
 <style scoped>
 .title{
-    letter-spacing: 8px;
+    letter-spacing: 6px;
     color: #2c2300;
 }
 .subtitle{
@@ -187,7 +187,7 @@ const getLocale = () => {
 	.sp{display:block;}
 	.title-jp{
 	    padding-top: 30px;
-		font-size:60px;
+		font-size:15vw;
 	}
 	.title-en{
 	    padding-top: 30px;

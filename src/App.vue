@@ -19,10 +19,38 @@ onMounted(() => {
 </script>
 
 <template>
-  <RouterView />
+	<div class="back">
+		<span class="fas fa-circle" />
+		<span class="fas fa-square" />
+	</div>
+	<RouterView />
 </template>
 
 <style>
+.back{
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+	z-index:-100;
+}
+.back .fa-circle{
+    position: fixed;
+    color: #ffebc8;
+    font-size: 500px;
+    top: 400px;
+    right: -200px;
+}
+.back .fa-square{
+	position: fixed;
+    font-size: 500px;
+    transform: rotate(30deg);
+    color: #ffe2e0;
+    top: -20px;
+    left: -250px;
+}
 html{
 	position:relative;
 	min-height:100%;
@@ -30,6 +58,7 @@ html{
 	color:#2c2300;
 }
 body{
+	background-color:transparent;
 	margin-bottom:60px;
 }
 body > .container {
@@ -79,10 +108,11 @@ body > .container {
 }
 
 #app{
-	background-color:#f7f3f2;
+	background-color:transparent;
 }
 
 .card-body{
+	background-color:transparent;
 	color:#2c2300;
 }
 .card-body .header-img{

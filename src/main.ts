@@ -12,6 +12,7 @@ import InfoMessage from "./components/InfoMessage.vue"
 
 import BntLocaleHeader from "./components/BntLocaleHeader.vue"
 import BntHeader from "./components/BntHeader.vue"
+import LPHeader from "./components/LPHeader.vue"
 import BntFooter from "./components/BntFooter.vue"
 import BntWaitModal from './views/BntWaitModal.vue'
 
@@ -60,6 +61,7 @@ app.component('error-message',ErrorMessage)
 app.component('info-message',InfoMessage)
 app.component('bnt-wait-modal',BntWaitModal)
 app.component('bnt-locale-header',BntLocaleHeader)
+app.component('lp-header',LPHeader)
 app.component('bnt-header',BntHeader)
 app.component('bnt-footer',BntFooter)
 

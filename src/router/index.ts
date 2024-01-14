@@ -7,6 +7,7 @@ import BntEndMessage from "../views/BntEndMessage.vue"
 import BntResult from "../views/BntResult.vue"
 import BntResult2 from "../views/BntResult2.vue"
 import BntResult3 from "../views/BntResult3.vue"
+import AboutBasicNeeds from "../views/AboutBasicNeeds.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,7 @@ const router = createRouter({
     {path:'/result/',name:'bnt.result',component:BntResult},
     {path:'/result2/:token',name:'bnt.result2/:token',component:BntResult2},
     {path:'/result3/:token',name:'bnt.result3/:token',component:BntResult3},
+    {path:'/about_basic_needs',name:'bnt.about_basic_needs',component:AboutBasicNeeds},
   ]
 })
 export default router
