@@ -6,8 +6,9 @@ const {t} = useI18n()
 <template>
 <footer class="footer">
 	<div class="container text-center">
-		<a target="peace-with" href="https://peace-tea.jp/">
-			Copyright(c) 2021- {{t('word.developer_name')}} All Rights Reserved.
+		<a target="peace-with" href="https://peace-tea.jp/ct/contact">
+			Copyright(c) All Rights Reserved.<br />
+			{{t('word.developer_name')}}
 		</a>
 	</div>
 </footer>
@@ -18,10 +19,9 @@ const {t} = useI18n()
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	height: 40px;
+	height: 60px;
 }
 .footer a{
-	text-decoration:none;
 	color:white;
 }
 @media (min-width:768px){

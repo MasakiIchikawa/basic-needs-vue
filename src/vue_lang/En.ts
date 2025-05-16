@@ -64,7 +64,7 @@ const contents = {
 			start_description:'As shown, 5 levels of answers from \n"well applicable" to "not applicable at all"\nare displayed for each question,\nso select the one that is most fit to you.',
 			start_description2:'When selected, the following questions will be displayed automatically.\nThere are 51 questions\n(answer time: about 3 minutes).',
 			privacy_comment:'For those who use it for the first time, there is a simple questionnaire such as birth year and occupation at the end.',
-			email_note:'Be sure to register an address that can receive emails. If you do not receive the email, you may not be able to provide the test results successfully.',
+			email_note:'Be sure to register an address that can receive emails. We send result page URL to registered email. If you do not receive the email, you may not be able to provide the test results successfully.',
 			privacy_agree:'By the time you start the assessment, you agree to the handling of your personal information.',
 			analyse_error:'The email may have failed to be sent. We apologize the inconvenience, but please register the correct email address and reply from the beginning.',
 			questionnaire_title:'Finally, please select the one that applies to the following items.',

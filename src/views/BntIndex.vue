@@ -138,7 +138,7 @@ const getLocale = () => {
 	.pc{display:block;}
 	.sp{display:none;}
 	.title-jp{
-	    padding-top: 30px;
+	  padding-top: 30px;
 		font-size:52px;
 	}
 	.title-en{
@@ -186,7 +186,7 @@ const getLocale = () => {
 	.pc{display:none;}
 	.sp{display:block;}
 	.title-jp{
-	    padding-top: 30px;
+	  padding-top: 30px;
 		font-size:15vw;
 	}
 	.title-en{

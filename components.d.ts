@@ -15,7 +15,6 @@ declare module '@vue/runtime-core' {
     BInputGroup: typeof import('bootstrap-vue-next')['BInputGroup']
     BntFooter: typeof import('./src/components/BntFooter.vue')['default']
     BntHeader: typeof import('./src/components/BntHeader.vue')['default']
-    'BntHeader.1': typeof import('./src/components/BntHeader.1.vue')['default']
     BntLocaleHeader: typeof import('./src/components/BntLocaleHeader.vue')['default']
     BubbleChart: typeof import('./src/components/BubbleChart.vue')['default']
     ErrorMessage: typeof import('./src/components/ErrorMessage.vue')['default']
